@@ -4,8 +4,11 @@
 #su -
 
 #ставим необходимые программы
+
 #apt update
+
 #apt install -y docker-compose
+
 #apt install -y git
 
 #копируем папку с проектом из GIT
