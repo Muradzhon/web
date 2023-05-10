@@ -1,12 +1,12 @@
 Установка
 
 #заходим по root
-su -
+#su -
 
 #ставим необходимые программы
-apt update
-apt install -y docker-compose
-apt install -y git
+#apt update
+#apt install -y docker-compose
+#apt install -y git
 
 #копируем папку с проектом из GIT
 git clone https://github.com/Muradzhon/web.git
