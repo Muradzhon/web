@@ -1,0 +1,36 @@
+version: '3'
+
+#задание именных томов для хранения данных Prometheus и Grafana
+volumes:
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      #конфиг сбора метрик с node-exporter
+      - ./conf/prometheus:/etc/prometheus
+      - prometheus-data:/prometheus
+    restart: unless-stopped
+    #настройка коннекта с хостом (использую шлюз сети контейнера)
+    extra_hosts:
+      - host.docker.internal:172.17.0.1
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+
+  grafana:
+    build: .
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+      #монтирую конфигиги для подключения к Prometheus и для дашборда
+      - ./conf/grafana/provisioning:/etc/grafana/provisioning
+    restart: unless-stopped

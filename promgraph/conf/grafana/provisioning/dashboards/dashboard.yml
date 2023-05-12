@@ -1,0 +1,12 @@
+apiVersion: 1
+
+providers:
+ - name: 'Default'
+   orgId: 1
+   folder: 'Services'
+   folderUid: ''
+   type: file
+   #путь с JSON файлом дашборда
+   options:
+     path: /etc/grafana/provisioning/dashboards
+
